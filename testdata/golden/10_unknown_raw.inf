@@ -1,0 +1,9 @@
+[SetupInfo]
+ProductName=Raw
+
+[Set_Install]
+Echo=start
+!!! not a normal key line !!!
+   indented raw
+=weird
+Echo=end

@@ -1,0 +1,6 @@
+[SetupInfo]
+ProductName=Quotes
+
+[Set_Install]
+Copy="%Src%\Files\A B\tool.exe","%Dst%\tool.exe"
+Echo="Hello; world"

@@ -1,0 +1,16 @@
+; Golden 20 variant
+[SetupInfo]
+ProductName=Variant20
+ProductVersion=1.0.20
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 20
+Run=%Src%\Files\v20.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 20
+DelTree=%Dst%\V20

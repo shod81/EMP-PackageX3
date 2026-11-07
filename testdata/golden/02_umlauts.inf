@@ -1,0 +1,17 @@
+; Golden 02 – Umlauts CP1252
+[SetupInfo]
+ProductName="Büro Suite ÄÖÜ"
+ProductVersion=2.1.0
+Manufacturer="Müller & Söhne GmbH"
+
+[Application]
+AppType=EXE
+
+[Product]
+Platform=x64
+
+[Set_Install]
+Echo=Installation der Büro Suite
+; Path with spaces
+Run="%Src%\Files\Setup.exe" /S
+DelTree=%Dst%\Büro

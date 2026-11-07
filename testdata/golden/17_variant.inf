@@ -1,0 +1,16 @@
+; Golden 17 variant
+[SetupInfo]
+ProductName=Variant17
+ProductVersion=1.0.17
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 17
+Run=%Src%\Files\v17.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 17
+DelTree=%Dst%\V17

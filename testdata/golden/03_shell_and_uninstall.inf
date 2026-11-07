@@ -1,0 +1,19 @@
+; Golden 03 – shell + uninstall prefixes
+[SetupInfo]
+ProductName=ShellLinks Demo
+ProductVersion=0.9.0
+
+[Product]
+#Shell:CreateLinks
+
+[CreateLinks]
+LinkName=Demo
+LinkPath=%Dst%\Demo.exe
+
+[Set_Install]
+Echo=Step one
+Echo=Step two
+
+[Set_Uninstall]
+Echo=Removing Demo
+--Echo=Uninstall branch

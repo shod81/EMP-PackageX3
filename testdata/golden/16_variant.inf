@@ -1,0 +1,16 @@
+; Golden 16 variant
+[SetupInfo]
+ProductName=Variant16
+ProductVersion=1.0.16
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 16
+Run=%Src%\Files\v16.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 16
+DelTree=%Dst%\V16

@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: "3.12"
+
+      - name: Sync
+        run: uv sync --extra dev
+
+      - name: Quality gates
+        run: |
+          uv run ruff check src tests
+          uv run mypy
+          uv run pytest
+          uv run python scripts/check_coverage_gates.py
+          uv run python scripts/check_release_gates.py
+
+      - name: Version gegen Tag pruefen
+        shell: pwsh
+        run: |
+          $ver = (Get-Content packaging/VERSION.json -Raw | ConvertFrom-Json).version
+          if ("v$ver" -ne "${{ github.ref_name }}") {
+            throw "Tag ${{ github.ref_name }} passt nicht zur Version $ver"
+          }
+          "VERSION=$ver" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Build (One-Dir)
+        run: uv run pyinstaller packaging/emp_packagex3.spec --noconfirm
+
+      - name: Lizenztexte beilegen
+        shell: pwsh
+        run: |
+          $dst = "dist/EMP-PackageX3"
+          Copy-Item -Path LICENSE, THIRD_PARTY_LICENSES.md -Destination $dst
+          Copy-Item -Path packaging/licenses/LGPL-3.0.txt, packaging/licenses/GPL-3.0.txt -Destination $dst
+          Get-ChildItem $dst -Filter *.txt | Select-Object Name
+
+      - name: ZIP und SHA256 erzeugen
+        shell: pwsh
+        run: |
+          $zip = "EMP-PackageX3-$env:VERSION.zip"
+          $sha = "$zip.sha256"
+          Compress-Archive -Path "dist/EMP-PackageX3" -DestinationPath $zip -CompressionLevel Optimal
+          $hash = (Get-FileHash -Path $zip -Algorithm SHA256).Hash.ToLower()
+          "$hash  $zip" | Out-File -FilePath $sha -Encoding ascii -NoNewline
+          "ZIP=$zip" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "SHA=$sha" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          Get-Content $sha
+
+      - name: Release anlegen oder aktualisieren
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $notes = "One-Dir-Binaerpaket fuer Windows x64 (unsigniert). Enthaelt die LGPL-3.0-Texte fuer PySide6/Qt. Aenderungen: CHANGELOG.md. Pruefsumme: $env:SHA."
+          gh release view $tag --json tagName 2>$null | Out-Null
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Release $tag existiert - Assets werden aktualisiert."
+            gh release upload $tag "$env:ZIP" "$env:SHA" --clobber
+            gh release edit $tag --title "EMP-PackageX3 $env:VERSION" --notes $notes
+          } else {
+            gh release create $tag "$env:ZIP" "$env:SHA" --title "EMP-PackageX3 $env:VERSION" --notes $notes
+          }

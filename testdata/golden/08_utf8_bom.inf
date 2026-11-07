@@ -1,0 +1,6 @@
+﻿; Golden 08 – UTF-8 BOM
+[SetupInfo]
+ProductName=UTF8 Café
+
+[Set_Install]
+Echo=Café install

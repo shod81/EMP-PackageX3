@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+dist-known-good/
+build/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# IDE / OS
+.idea/
+.vscode/
+.zcode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Packaging
+*.spec
+!packaging/*.spec
+/release/
+/dist-onedir/
+
+# Local secrets / machine
+.env
+*.pfx
+*.p12
+
+# Agent worktrees / local state (kept out of git for every clone, not just
+# this machine's .git/info/exclude)
+.kilo/
+.kilocode/
+
+# WAL-style backups written next to Setup.inf by empirum_infra.fs_safe
+.emp_packagex3_bak/
+
+# Local A/B probes against real depot INFs 
+scratch/

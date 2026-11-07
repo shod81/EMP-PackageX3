@@ -1,0 +1,16 @@
+; Golden 24 variant
+[SetupInfo]
+ProductName=Variant24
+ProductVersion=1.0.24
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 24
+Run=%Src%\Files\v24.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 24
+DelTree=%Dst%\V24

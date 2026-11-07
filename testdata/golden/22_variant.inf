@@ -1,0 +1,16 @@
+; Golden 22 variant
+[SetupInfo]
+ProductName=Variant22
+ProductVersion=1.0.22
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 22
+Run=%Src%\Files\v22.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 22
+DelTree=%Dst%\V22

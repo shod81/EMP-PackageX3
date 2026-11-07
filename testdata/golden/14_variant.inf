@@ -1,0 +1,16 @@
+; Golden 14 variant
+[SetupInfo]
+ProductName=Variant14
+ProductVersion=1.0.14
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 14
+Run=%Src%\Files\v14.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 14
+DelTree=%Dst%\V14

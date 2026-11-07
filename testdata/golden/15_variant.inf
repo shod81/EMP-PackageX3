@@ -1,0 +1,16 @@
+; Golden 15 variant
+[SetupInfo]
+ProductName=Variant15
+ProductVersion=1.0.15
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 15
+Run=%Src%\Files\v15.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 15
+DelTree=%Dst%\V15

@@ -1,0 +1,16 @@
+; Golden 18 variant
+[SetupInfo]
+ProductName=Variant18
+ProductVersion=1.0.18
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 18
+Run=%Src%\Files\v18.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 18
+DelTree=%Dst%\V18

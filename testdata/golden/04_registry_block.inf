@@ -1,0 +1,13 @@
+; Golden 04 – registry-like keys
+[SetupInfo]
+ProductName=Reg Demo
+
+[Set_Registry]
+Root=HKLM
+Key=Software\Hodrius\Demo
+ValueName=Installed
+ValueData=1
+
+[Set_Install]
+Echo=Writing registry
+#Set_Registry

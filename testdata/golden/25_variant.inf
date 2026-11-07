@@ -1,0 +1,16 @@
+; Golden 25 variant
+[SetupInfo]
+ProductName=Variant25
+ProductVersion=1.0.25
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 25
+Run=%Src%\Files\v25.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 25
+DelTree=%Dst%\V25

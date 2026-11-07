@@ -1,0 +1,18 @@
+; Golden 01 – minimal
+[SetupInfo]
+ProductName=Demo Product
+ProductVersion=1.0.0
+Manufacturer=Hodrius Systems
+
+[Application]
+AppType=MSI
+CallTimeOut=3600000
+
+[Product]
+Platform=x64
+; Branding
+Icon=Setup.ico
+
+[Set_Install]
+Echo=Installing Demo Product
+Run=%Src%\Files\Demo.msi

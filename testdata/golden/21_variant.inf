@@ -1,0 +1,16 @@
+; Golden 21 variant
+[SetupInfo]
+ProductName=Variant21
+ProductVersion=1.0.21
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 21
+Run=%Src%\Files\v21.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 21
+DelTree=%Dst%\V21

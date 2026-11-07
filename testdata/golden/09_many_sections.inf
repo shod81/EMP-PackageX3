@@ -1,0 +1,23 @@
+[SetupInfo]
+ProductName=Many
+
+[Application]
+AppType=Script
+
+[Product]
+Platform=x64
+
+[Set_Install]
+Echo=A
+
+[Set_Uninstall]
+Echo=B
+
+[Custom_Checks]
+Echo=C
+
+[Error_Install]
+Echo=fail
+
+[-Error_Uninstall]
+--Echo=fail uninstall

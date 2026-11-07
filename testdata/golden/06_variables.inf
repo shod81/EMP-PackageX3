@@ -1,0 +1,10 @@
+[SetupInfo]
+ProductName=Var Demo
+
+[Application]
+Src=%PackageDir%
+Dst=%ProgramFilesDir%\Demo
+
+[Set_Install]
+Echo=%ProductName%
+Run=%Src%\setup.exe

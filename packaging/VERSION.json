@@ -1,0 +1,5 @@
+{
+  "version": "1.1.0",
+  "notes": "1.1.0 - Erstes Open-Source-Release (MIT): Paket-Standard statt interner Konventionsbezeichnung, bereinigte Beispieldaten, Community-Dateien, LGPL-Hinweise, Release-Pipeline mit SHA256.",
+  "download_url": "https://github.com/shod81/EMP-PackageX3/releases/latest/download/EMP-PackageX3-1.1.0.zip"
+}

@@ -1,0 +1,16 @@
+; Golden 23 variant
+[SetupInfo]
+ProductName=Variant23
+ProductVersion=1.0.23
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 23
+Run=%Src%\Files\v23.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 23
+DelTree=%Dst%\V23

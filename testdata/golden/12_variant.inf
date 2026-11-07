@@ -1,0 +1,16 @@
+; Golden 12 variant
+[SetupInfo]
+ProductName=Variant12
+ProductVersion=1.0.12
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 12
+Run=%Src%\Files\v12.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 12
+DelTree=%Dst%\V12

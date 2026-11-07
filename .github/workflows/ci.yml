@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: "3.12"
+
+      - name: Sync
+        run: uv sync --extra dev
+
+      - name: Ruff
+        run: uv run ruff check src tests
+
+      - name: Mypy
+        run: uv run mypy
+
+      - name: Pytest
+        run: uv run pytest
+
+      - name: Coverage gates (per package)
+        run: uv run python scripts/check_coverage_gates.py
+
+      - name: Import smoke
+        run: uv run python -c "from emp_packagex3 import APP_NAME, COPYRIGHT, TARGET_EMPIRUM_VERSION, __version__; print(APP_NAME, __version__, 'Empirum', TARGET_EMPIRUM_VERSION); print(COPYRIGHT)"
+
+      - name: Update manifest sanity
+        run: uv run python -c "import json; from pathlib import Path; m=json.loads(Path('packaging/VERSION.json').read_text(encoding='utf-8')); assert 'version' in m"
+
+      - name: Release gates (automated checklist)
+        run: uv run python scripts/check_release_gates.py
+
+  # ARM64 native build is deferred to 1.1 (plan). Documented matrix job placeholder:
+  # arm64-smoke:
+  #   runs-on: windows-11-arm
+  #   if: false
+  #   steps: ...

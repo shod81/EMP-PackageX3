@@ -1,0 +1,11 @@
+; preamble comment before sections
+
+[SetupInfo]
+ProductName=Preamble Demo
+
+[Set_Install]
+Echo=Go
+
+
+[Set_Uninstall]
+Echo=Gone

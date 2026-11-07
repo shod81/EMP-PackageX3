@@ -1,0 +1,16 @@
+; Golden 19 variant
+[SetupInfo]
+ProductName=Variant19
+ProductVersion=1.0.19
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 19
+Run=%Src%\Files\v19.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 19
+DelTree=%Dst%\V19

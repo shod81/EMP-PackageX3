@@ -1,0 +1,16 @@
+; Golden 13 variant
+[SetupInfo]
+ProductName=Variant13
+ProductVersion=1.0.13
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 13
+Run=%Src%\Files\v13.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 13
+DelTree=%Dst%\V13

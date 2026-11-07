@@ -1,0 +1,16 @@
+; Golden 11 variant
+[SetupInfo]
+ProductName=Variant11
+ProductVersion=1.0.11
+
+[Application]
+Reboot=0
+
+[Set_Install]
+Echo=Variant 11
+Run=%Src%\Files\v11.exe
+If=%ErrorLevel%
+
+[Set_Uninstall]
+Echo=Remove 11
+DelTree=%Dst%\V11
